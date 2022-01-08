@@ -12,18 +12,20 @@ app.set('views', 'views');
 
 
 
-app.get('/', function(req, res){
-    res.render('splash');
-})
-
-app.get('/game', function(req, res){
-    res.render('game');
-});
 
 
 // const port = process.argv[2];
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
+
+app.get('/', function(req, res){
+    res.render('splash');
+})
+
+app.get('/game', function(req, res){
+    res.render('game', {portNumber: port});
+});
+
 
 const wsServer = new webSocket.Server({server});
 let gameList = {};

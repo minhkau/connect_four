@@ -1,5 +1,6 @@
-                          // the port to communicate is hardcoded, need to change !!!!
-let ws = new WebSocket('ws://localhost:3000');
+ // the port to communicate is hardcoded, need to change !!!!
+const portNumber = document.querySelector('#portNumber').textContent;
+let ws = new WebSocket('ws://localhost:' + portNumber);
 let playerName;
 let isRed;
 let canMove;
@@ -106,6 +107,7 @@ const winningMessage = document.querySelector('.winning-message');
 const waitingMessage = document.querySelector('.waiting-message');
 const newGameButton = document.querySelector('#newGameButton');
 const winningText = document.querySelector('[data-winning-message-text]');
+
 
 
 //now we will create an array for each column in bottom up fashion with extra element of class row top
