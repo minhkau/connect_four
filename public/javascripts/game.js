@@ -1,6 +1,8 @@
  // the port to communicate is hardcoded, need to change !!!!
 const portNumber = document.querySelector('#portNumber').textContent;
-let ws = new WebSocket('ws://connect4minhkau.herokuapp.com/:' + portNumber);
+// let ws = new WebSocket('ws://connect4minhkau.herokuapp.com/:' + portNumber);
+var HOST = location.origin.replace(/^http/, 'ws');
+var ws = new WebSocket(HOST);
 let playerName;
 let isRed;
 let canMove;
