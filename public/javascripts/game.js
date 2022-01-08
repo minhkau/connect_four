@@ -1,8 +1,8 @@
  // the port to communicate is hardcoded, need to change !!!!
 const portNumber = document.querySelector('#portNumber').textContent;
 // let ws = new WebSocket('ws://connect4minhkau.herokuapp.com/:' + portNumber);
-var HOST = location.origin.replace(/^http/, 'ws');
-var ws = new WebSocket(HOST);
+let HOST = location.origin.replace(/^http/, 'ws');
+let ws = new WebSocket(HOST);
 let playerName;
 let isRed;
 let canMove;
@@ -381,7 +381,9 @@ const resetGame = () => {
     winningMessage.classList.remove('show');
     removeListners();
     // yellowIsNext = false;
-    ws = new WebSocket('ws://localhost:3000');
+    // ws = new WebSocket('ws://localhost:3000');
+    HOST = location.origin.replace(/^http/, 'ws');
+    ws = new WebSocket(HOST);
     setupSocket();
     // cleanBoard();
 }
