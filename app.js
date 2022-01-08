@@ -50,12 +50,10 @@ wsServer.on('connection', function connection(socket) {
 
     socket.onclose = event => {
         if(gameList[socket['gameID']] != null){
-
-            
+            const gameSate = gameList[socket['gameID']].endGame(socket);
             delete gameList[socket['gameID']];
         }
         numberOfPlayers--;
-
     }
 
     socket.onmessage = event => {
@@ -64,6 +62,12 @@ wsServer.on('connection', function connection(socket) {
         if(message == 'make move'){
             data['playerName'] = socket['playerName'];
             gameList[socket['gameID']].notifyMove(data);
+        }
+
+        if(message == 'finish game'){
+            if(gameList[socket['gameID']] != null){
+                gameList[socket['gameID']].finishGame();
+            }
         }
     } 
 });

@@ -1,3 +1,4 @@
+const e = require('express');
 const webSocket = require('ws');
 
 /**
@@ -68,7 +69,29 @@ game.prototype.notifyMove = function(data) {
     }
 }
 
+game.prototype.endGame = function(socket) {
+    // if the state is still 1, that means 1 player has left before the game is finished
+    if(this.state == 1){
+        const afkPlayer = socket['playerName'];
+        if(afkPlayer == 'a'){
+            this.playerB.send(JSON.stringify({
+                message: "other player afk"
+            }))
+        } else {
+            this.playerA.send(JSON.stringify({
+                message: "other player afk"
+            }))
+        }
+    }
 
+    // if the state is 2, that means the game is finished, there's no need to inform any user
+
+}
+
+game.prototype.finishGame = function(){
+    // state 2 means the game is finished
+    this.state = 2;
+}
 
 
 module.exports = game;

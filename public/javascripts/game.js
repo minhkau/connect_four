@@ -63,6 +63,7 @@ const setupSocket = function(){
                 removeListners();
                 winningMessage.classList.add('show');
                 // changeGameState();
+                finishGame();
                 ws.close();
             };
             yellowIsNext = !yellowIsNext;
@@ -78,6 +79,7 @@ const setupSocket = function(){
             winningText.textContent= 'Other player has disconnected'
             removeListners();
             winningMessage.classList.add('show');
+            ws.close();
         }
     }
     
@@ -96,11 +98,11 @@ const makeMove = (location) => {
 }
 
 
-// const changeGameState = () => {
-//     ws.send(JSON.stringify({
-//         message: 'change game state',
-//     }))
-// }
+const finishGame = () => {
+    ws.send(JSON.stringify({
+        message: 'finish game',
+    }))
+}
 
 
 const cells = document.querySelectorAll('.cell:not(.row-top)');
@@ -271,6 +273,7 @@ const handleCellClick = (e) =>{
             removeListners();
             winningMessage.classList.add('show');
             // changeGameState();
+            finishGame();
             ws.close();
         };
         yellowIsNext = !yellowIsNext;
