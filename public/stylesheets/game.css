@@ -1,250 +1,230 @@
-html{
-  height: 100%;
-}
+
 header .container, footer .container{
-    width: 100vw;
-    display: flex;
-    gap:20em;
-    justify-content: center;
+  display: flex;
+  gap:20em;
+  justify-content: center;
 }
 header{
-    background-color: skyblue;
+  background-color: skyblue;
 }
 
 header .image{
-    width: 285px;
+  width: 285px;
 }
 header img{
-    max-width: 100%;
+  max-width: 100%;
 }
 
 
 header nav{
-    width: 400px;
-    padding: 50px 0 0 0;
+  width: 400px;
+  padding: 50px 0 0 0;
 }
 header a{
-    padding: 0 5px 0 5px;
-    font-family: 'Gravitas One', cursive;
-    font-size: 90%;
-    color: white;
+  padding: 0 5px 0 5px;
+  font-family: 'Gravitas One', cursive;
+  font-size: 90%;
+  color: white;
 }
 
 
 
 footer{
-    overflow: auto;
-    min-width: 855px;
-    background-color: skyblue;
+  overflow: auto;
+  background-color: skyblue;
 }
 
 
 footer h5{
-    padding:25px;
-    size : 70%;
+  padding:25px;
+  size : 70%;
 }
 
 footer p{
-    padding:5px;
-    color: cornsilk;
+  padding:5px;
+  color: cornsilk;
 
 }
 
 footer .container .Filip{
-    width: 285px;
+  width: 285px;
 }
 
 footer .container .Minh{
-    width: 285px;
+  width: 285px;
 }
+
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background: white;
-    font-family: sans-serif;
-    padding: 25px;
-    width: 100%;
-    height:100%;
-  }
-  
-  h1 {
-    text-transform: uppercase;
-  }
-  
-  .game-board {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    height: 700px;
-    margin: 10px 0 25px;
-    width: 700px;
-  }
-  
-  .cell {
-    align-items: center;
-    background: skyblue;
-    display: flex;
-    height: 100px;
-    justify-content: center;
-    width: 100px;
-  }
-  
-  .cell::after {
-    background: white;
-    border-radius: 50%;
-    border: 3px solid black;
-    content: '';
-    cursor: pointer;
-    height: 75px;
-    width: 75px;
-  }
-  
-  .cell:not(.row-top).red::after {
-    background: red;
-  }
-  .cell:not(.row-top).yellow::after {
-    background: yellow;
-  }
-  
-  .cell:not(.row-top).red.win {
-    background: red;
-  }
-  
-  .cell:not(.row-top).yellow.win {
-    background: yellow;
-  }
-  
-  .cell.row-top {
-    background: white;
-  }
-  
-  .cell.row-top::after {
-    border: none;
-  }
-  
-  .cell.row-top.red::after {
-    background: red;
-    border: 3px solid black;
-  }
-  
-  .cell.row-top.yellow::after {
-    background: yellow;
-    border: 3px solid black;
-  }
-  
-  .reset {
-    background-color: #4370F1;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 15px 30px;
-    text-transform: uppercase;
-    margin: 10px;
-  }
-  
-  .reset:hover {
-    background-color: #1D50F1;
-  }
-  
-  .reset:active {
-    background-color: #4d7ef1;
-  
-  }
-  /* Util CSS */
-  .left-border {
-    border-left: 3px solid black;
-  }
-  
-  .top-border {
-    border-top: 3px solid black;
-  }
-  
-  .right-border {
-    border-right: 3px solid black;
-  }
-  
-  .bottom-border {
-    border-bottom: 3px solid black;
-  }
-  
-  .left-border.top-border {
-    border-radius: 10px 0 0 0;
-  }
-  
-  .right-border.top-border {
-    border-radius: 0 10px 0 0;
-  }
-  
-  .right-border.bottom-border {
-    border-radius: 0 0 10px 0;
-  }
-  
-  .left-border.bottom-border {
-    border-radius: 0 0 0 10px;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .winning-message{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(135,206,235,0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 5em;
-    flex-direction: column;
-    gap: 40px;
-  }
+body {
+  background: white;
+  font-family: sans-serif;
+  padding: 25px;
+}
 
-  .waiting-message{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(135,206,235,0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 5em;
-    flex-direction: column;
-    gap: 40px;
-  }
+h1 {
+  text-transform: uppercase;
+}
 
-  main{
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  height: 700px;
+  margin: 10px 0 25px;
+  width: 700px;
+}
 
-  #newGameButton{
-    width: 200px;
-    height: 50px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-  }
+.cell {
+  align-items: center;
+  background: skyblue;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  width: 100px;
+}
 
-  #newGameButton:hover{
-    background-color: black;
-    color: white;
-  }
+.cell::after {
+  background: white;
+  border-radius: 50%;
+  border: 3px solid black;
+  content: '';
+  cursor: pointer;
+  height: 75px;
+  width: 75px;
+}
 
-  .show{
-    display: flex;
-  }
-  
+.cell:not(.row-top).red::after {
+  background: red;
+}
+.cell:not(.row-top).yellow::after {
+  background: yellow;
+}
+
+.cell:not(.row-top).red.win {
+  background: red;
+}
+
+.cell:not(.row-top).yellow.win {
+  background: yellow;
+}
+
+.cell.row-top {
+  background: white;
+}
+
+.cell.row-top::after {
+  border: none;
+}
+
+.cell.row-top.red::after {
+  background: red;
+  border: 3px solid black;
+}
+
+.cell.row-top.yellow::after {
+  background: yellow;
+  border: 3px solid black;
+}
+
+.reset {
+  background-color: #4370F1;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.reset:hover {
+  background-color: #1D50F1;
+}
+
+.reset:active {
+  background-color: #4d7ef1;
+
+}
+/* Util CSS */
+.left-border {
+  border-left: 3px solid black;
+}
+
+.top-border {
+  border-top: 3px solid black;
+}
+
+.right-border {
+  border-right: 3px solid black;
+}
+
+.bottom-border {
+  border-bottom: 3px solid black;
+}
+
+.left-border.top-border {
+  border-radius: 10px 0 0 0;
+}
+
+.right-border.top-border {
+  border-radius: 0 10px 0 0;
+}
+
+.right-border.bottom-border {
+  border-radius: 0 0 10px 0;
+}
+
+.left-border.bottom-border {
+  border-radius: 0 0 0 10px;
+}
+
+.winning-message{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(135,206,235,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5em;
+  flex-direction: column;
+  gap: 40px;
+}
+
+main{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#newGameButton{
+  width: 200px;
+  height: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+#newGameButton:hover{
+  background-color: black;
+  color: white;
+}
+
+.show{
+  display: flex;
+}
+

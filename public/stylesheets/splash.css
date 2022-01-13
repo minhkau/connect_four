@@ -15,6 +15,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(../images/splush.svg);
+    position: relative;
+}
+h3{
+    color: #99CCFF;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.massage{
+    top: 20%;
+    position: absolute;
+    right: 40%;
 }
 .cell {
     align-items: center;
@@ -23,6 +34,8 @@
     height: 40px;
     justify-content: center;
     width: 40px;
+    transition: all 1s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .cell::after {
@@ -30,7 +43,6 @@
     border-radius: 50%;
     border: 1px solid black;
     content: '';
-    cursor: pointer;
     height: 30px;
     width: 30px;
 }
@@ -48,4 +60,8 @@
 .left{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+.cell.up{
+    transform: translateY(-60%);
 }
