@@ -7,7 +7,7 @@ const webSocket = require('ws');
 const path = require('path');
 
 
-// tell expres where to look for static files
+// tell express where to look for static files
 app.use(express.static(__dirname + "/public"));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
