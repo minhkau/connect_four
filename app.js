@@ -1,7 +1,5 @@
 const express = require("express");
-
 const http = require("http");
-
 const app = express();
 const webSocket = require('ws');
 const path = require('path');
@@ -20,17 +18,16 @@ app.set('views', 'views');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 
-// middlewares
-app.get('/', function (req, res) {
+app.get('/', function(req, res){
     res.render('splash');
 })
 
-app.get('/game', function (req, res) {
-    res.render('game', { portNumber: port });
+app.get('/game', function(req, res){
+    res.render('game', {portNumber: port});
 });
 
 
-const wsServer = new webSocket.Server({ server });
+const wsServer = new webSocket.Server({server});
 let gameList = {};
 let numberOfGames = 0;
 let numberOfPlayers = 0;
@@ -52,7 +49,7 @@ wsServer.on('connection', function connection(socket) {
     socket['gameID'] = numberOfGames;
 
     socket.onclose = event => {
-        if (gameList[socket['gameID']] != null) {
+        if(gameList[socket['gameID']] != null){
             const gameSate = gameList[socket['gameID']].endGame(socket);
             delete gameList[socket['gameID']];
         }
@@ -62,17 +59,17 @@ wsServer.on('connection', function connection(socket) {
     socket.onmessage = event => {
         const data = JSON.parse(event.data);
         const message = data.message;
-        if (message == 'make move') {
+        if(message == 'make move'){
             data['playerName'] = socket['playerName'];
             gameList[socket['gameID']].notifyMove(data);
         }
 
-        if (message == 'finish game') {
-            if (gameList[socket['gameID']] != null) {
+        if(message == 'finish game'){
+            if(gameList[socket['gameID']] != null){
                 gameList[socket['gameID']].finishGame();
             }
         }
-    }
+    } 
 });
 
 
