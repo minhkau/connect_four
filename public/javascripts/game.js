@@ -96,7 +96,6 @@ const makeMove = (location) => {
         location: location,
     }))
 }
-z``
 
 const finishGame = () => {
     ws.send(JSON.stringify({
