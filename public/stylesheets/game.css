@@ -203,6 +203,22 @@ h1 {
   gap: 40px;
 }
 
+.waiting-message{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(135,206,235,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5em;
+  flex-direction: column;
+  gap: 40px;
+}
+
 main{
   position: relative;
   width: 100%;
