@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/splash.css">
-    <title>Document</title>
+    <title>Connect Four</title>
 </head>
 <body>
     <div class="container">
@@ -16,7 +16,10 @@
         <div class="massage">
             <h3>Welcome to Connect Four</h3>
         </div>
-        <button class="newGame"></button>
+        <form action="/game" method="GET">
+            <input class="newGame" value = "Join A Game !" type ="submit"> 
+        </form>
+       
         <div class="information">
             <div class="piece">
                 <div>Number of active players</div>
