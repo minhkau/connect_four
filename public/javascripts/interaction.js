@@ -7,10 +7,8 @@ let playerName;
 let isRed;
 let canMove;
 let yellowIsNext;
-let numberOfYellowPieces = 0;
 let interval;
-let seconds = 0;
-let minutes = 0;
+let game=new cos();
 
 const setupSocket = function () {
     ws.onopen = () => {
@@ -54,7 +52,7 @@ const setupSocket = function () {
             circle.classList.remove('red');
 
             isRed ? circle.classList.add('yellow') : circle.classList.add('red');
-            numberOfYellowPieces = 0;
+            game.numberOfYellowPieces = 0;
             startClock();
         }
 
@@ -67,7 +65,7 @@ const setupSocket = function () {
 
             cellToPlay.classList.add(!isRed ? 'red' : 'yellow');
             //Updates the number of pieces
-            !isRed ? BoxForYellowPieces.innerHTML=++numberOfYellowPieces : BoxForYellowPieces.innerHTML=++numberOfYellowPieces;
+            !isRed ? BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces : BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces;
 
 
             //ToDo check for the state of the game
@@ -198,19 +196,19 @@ let gameIsOn = true;
 
 // functionality of the clock
 function ruuningClock () {
-    seconds++;
-    if(seconds<=9){
-        secondsOnTimer.innerHTML = "0" + seconds;
+    game.seconds++;
+    if(game.seconds<=9){
+        secondsOnTimer.innerHTML = "0" + game.seconds;
     }
-    if(seconds>9){
-        secondsOnTimer.innerHTML = seconds;
+    if(game.seconds>9){
+        secondsOnTimer.innerHTML = game.seconds;
     }
-    if(seconds>59){
+    if(game.seconds>59){
         secondsOnTimer.innerHTML = "00";
-        seconds = 0;
-        minutes++;
+        game.seconds = 0;
+        game.minutes++;
     }
-    minutesOnTimer.innerHTML = minutes;
+    minutesOnTimer.innerHTML = game.minutes;
 };
 // starts the clock
 function startClock () {
@@ -223,8 +221,8 @@ function startClock () {
 function stopClock () {
     // console.log('in stop', interval)
     clearInterval(interval);
-    seconds = 0;
-    minutes = 0;
+    game.seconds = 0;
+    game.minutes = 0;
 };
 
 
@@ -232,6 +230,12 @@ function stopClock () {
 //Functions
 
 //returns array form of classes of a cell
+
+function cos(){
+    this.minutes = 0;
+    this.seconds = 0;
+    this.numberOfYellowPieces = 0;
+}
 const getClassListArray = (cell) => {
     const classList = cell.classList;
     return [...classList];
