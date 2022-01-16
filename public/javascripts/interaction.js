@@ -1,5 +1,5 @@
 // the port to communicate is hardcoded, need to change !!!!
-const portNumber = document.querySelector('#portNumber').textContent;
+// const portNumber = document.querySelector('#portNumber').textContent;
 // let ws = new WebSocket('ws://connect4minhkau.herokuapp.com/:' + portNumber);
 let HOST = location.origin.replace(/^http/, 'ws');
 let ws = new WebSocket(HOST);
@@ -35,6 +35,7 @@ const setupSocket = function () {
             // gameID = ws['id'];
             playerName = data.playerName;
             if (playerName == 'a') {
+                waitingText.textContent = 'Waiting for another player';
                 waitingMessage.classList.add('show');
             }
         };
@@ -110,6 +111,8 @@ const winningMessage = document.querySelector('.winning-message');
 const waitingMessage = document.querySelector('.waiting-message');
 const newGameButton = document.querySelector('#newGameButton');
 const winningText = document.querySelector('[data-winning-message-text]');
+const waitingText = document.querySelector('[data-waiting-message-text]');
+
 
 
 
