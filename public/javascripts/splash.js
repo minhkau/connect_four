@@ -3,16 +3,16 @@ const second= document.querySelector('.second');
 const third = document.querySelector('.third');
 const fourth =  document.querySelector('.fourth');
 
-console.log(first,second,third,fourth);
+// console.log(first,second,third,fourth);
 
 
 const upFirst = (e) =>{
-    console.log(e);
+    // console.log(e);
     first.classList.toggle('up');
-    console.log(first);
+    // console.log(first);
 };
 const upSecond = (e)=>{
-    console.log(e.target);
+    // console.log(e.target);
     if(e.target===first){
         second.classList.toggle('up');
     }
@@ -35,4 +35,30 @@ first.addEventListener('transitionend',upSecond);
 second.addEventListener('transitionend',upThird);
 third.addEventListener('transitionend',upFourth);
 fourth.addEventListener('transitionend',upFirst);
+
+
+
+const numberOfPlayers = document.querySelector('#players');
+const numberOfGamesPlayed = document.querySelector('#gamesplayed');
+const numberOfOngoingGames = document.querySelector('#ongoinggames');
+
+
+// request statistics from the server
+setInterval(() => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'stats', true)
+    xhr.onload = function(){
+        if(this.status == 200){
+            let stats = JSON.parse(this.response);
+            // console.log(stats['number of players']);
+            numberOfPlayers.textContent = stats['number of players'];
+            numberOfGamesPlayed.textContent = stats['number of games played'];
+            numberOfOngoingGames.textContent = stats['number of ongoing games'];
+        }
+    }
+    xhr.send();
+},
+1000)
+
+
 

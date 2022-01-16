@@ -24,26 +24,36 @@ app.get('/game', function (req, res) {
 });
 
 
+// handle ajax request for statistics of the server
+app.get('/stats', function (req, res) {
+    res.send(JSON.stringify({
+        "number of players" : numberOfPlayers,
+        "number of games played": numberOfGamesPlayed,
+        "number of ongoing games": Object.keys(gameList).length,
+    }))
+})
+
+
 const wsServer = new webSocket.Server({ server });
 let gameList = {};
-let numberOfGames = 0;
+let numberOfGamesPlayed = 0;
 let numberOfPlayers = 0;
-const Game = require('./models/gameModel');
+const Game = require('./models/gameModel')
 
 wsServer.on('connection', function connection(socket) {
     console.log('new connection');
     numberOfPlayers++;
     if (numberOfPlayers % 2 != 0) {
-        numberOfGames++;
-        let newGame = new Game(numberOfGames, socket);
-        gameList[numberOfGames] = newGame;
+        numberOfGamesPlayed++;
+        let newGame = new Game(numberOfGamesPlayed, socket);
+        gameList[numberOfGamesPlayed] = newGame;
         socket['playerName'] = 'a';
     } else {
-        gameList[numberOfGames].addSecondPlayer(socket);
+        gameList[numberOfGamesPlayed].addSecondPlayer(socket);
         socket['playerName'] = 'b';
     }
 
-    socket['gameID'] = numberOfGames;
+    socket['gameID'] = numberOfGamesPlayed;
 
     socket.onclose = event => {
         if (gameList[socket['gameID']] != null) {
