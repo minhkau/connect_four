@@ -78,7 +78,7 @@ footer .container .Minh{
     justify-content: center;
   }
 
-  .circle-yellow, .circle-red{
+  .circle.yellow, .circle.red{
     display: flex;
     height: calc(var(--cos)/7);
     justify-content: center;
@@ -86,7 +86,7 @@ footer .container .Minh{
     align-items: center;
   }
 
-  .circle-yellow::after, .circle-red::after{
+  .circle.yellow::after, .circle.red::after{
     border-radius: 50%;
     border: 3px solid black;
     content: '';
@@ -95,11 +95,11 @@ footer .container .Minh{
     width: calc(var(--cos)*75/700);
   }
 
-  .circle-yellow::after{
+  .circle.yellow::after{
     background: yellow;
   }
 
-  .circle-red::after{
+  .circle.red::after{
     background: red;
   }
 
@@ -117,9 +117,10 @@ footer .container .Minh{
     border: 3px solid black;
     margin-left: 10%;
     box-shadow: 0 4px 8px grey;
+    align-items: center;
   }
 
-  .number-red,.number-yellow{
+  .number{
     flex:1;
     display: flex;
     justify-content: center;
