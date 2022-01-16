@@ -1,18 +1,13 @@
 const express = require("express");
-
 const http = require("http");
-
 const app = express();
 const webSocket = require('ws');
-const path = require('path');
 
 
-// tell expres where to look for static files
+// tell express where to look for static files
 app.use(express.static(__dirname + "/public"));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
-
 
 
 
@@ -20,7 +15,6 @@ app.set('views', 'views');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 
-// middlewares
 app.get('/', function (req, res) {
     res.render('splash');
 })

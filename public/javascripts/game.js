@@ -20,13 +20,12 @@ const setupSocket = function () {
      * join room
      * game start
      * other player move
-     * game end
      * other player afk
      * 
      * 
      * Sent by client:
      * make move
-     * change game state
+     * finish game
      * 
      */
     ws.onmessage = (event) => {
@@ -96,7 +95,7 @@ const makeMove = (location) => {
         location: location,
     }))
 }
-z``
+
 
 const finishGame = () => {
     ws.send(JSON.stringify({
