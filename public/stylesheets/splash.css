@@ -66,3 +66,19 @@ h3{
 .cell.up{
     transform: translateY(-60%);
 }
+.information{
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 10vh;
+}
+
+.piece{
+    height: 10vh;
+    width: 30vw;
+    border-radius: 10px;
+    background: dodgerblue;
+    box-shadow: 5px 5px 0 grey;
+}

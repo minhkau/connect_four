@@ -112,6 +112,11 @@ const waitingMessage = document.querySelector('.waiting-message');
 const newGameButton = document.querySelector('#newGameButton');
 const winningText = document.querySelector('[data-winning-message-text]');
 const waitingText = document.querySelector('[data-waiting-message-text]');
+const BoxForYellowPieces = document.querySelector('.number-yellow h1');
+const BoxForRedPieces = document.querySelector('.number-red h1');
+const secondsOnTimer = document.querySelector('.seconds');
+const minutesOnTimer = document.querySelector('.minutes');
+
 
 
 
@@ -174,8 +179,44 @@ const row5 = [cells[35], cells[36], cells[37], cells[38], cells[39], cells[40], 
 const rows = [row0, row1, row2, row3, row4, row5, topRow];
 
 let gameIsOn = true;
+let numberOfYellowPieces = 0;
+let numberOfRedPieces = 0;
+let intevral;
+let seconds = 0;
+let minutes = 0;
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Clock section 
 
+// functionality of the clock
+function ruuningClock () {
+    seconds++;
+    if(seconds<=9){
+        secondsOnTimer.innerHTML = "0" + seconds;
+    }
+    if(seconds>9){
+        secondsOnTimer.innerHTML = seconds;
+    }
+    if(seconds>59){
+        secondsOnTimer.innerHTML = "00";
+        seconds = 0;
+        minutes++;
+    }
+    minutesOnTimer.innerHTML = minutes;
+};
+// starts the clock
+function startClock () {
+    intevral = setInterval(ruuningClock,1000);
+    console.log(intevral);
+};
+//stops the clock
+function stopClock () {
+    clearInterval(intevral);
+    seconds = 0;
+    minutes = 0;
+};
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Functions
 
 //returns array form of classes of a cell
