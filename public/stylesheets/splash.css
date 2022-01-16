@@ -76,9 +76,15 @@ h3{
 }
 
 .piece{
-    height: 10vh;
-    width: 20vw;
-    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    height: 15vh;
+    width: 25vw;
+    border-radius: 30px;
     background: dodgerblue;
     box-shadow: 5px 5px 0 grey;
     transition: all 0,5s;
