@@ -77,8 +77,13 @@ h3{
 
 .piece{
     height: 10vh;
-    width: 30vw;
-    border-radius: 10px;
+    width: 20vw;
+    border-radius: 20px;
     background: dodgerblue;
     box-shadow: 5px 5px 0 grey;
+    transition: all 0,5s;
+}
+
+.piece:hover{
+    transform: scale(1.1);
 }

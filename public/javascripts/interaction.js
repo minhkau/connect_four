@@ -60,6 +60,8 @@ const setupSocket = function () {
             cellToPlay.classList.add(!isRed ? 'red' : 'yellow');
             //Updates the number of pieces
             !isRed ? BoxForRedPieces.innerHTML=++numberOfRedPieces : BoxForYellowPieces.innerHTML=++numberOfYellowPieces;
+            isRed ? BoxForRedPieces.innerHTML=numberOfRedPieces++ : BoxForYellowPieces.innerHTML=numberOfYellowPieces++;
+
 
             //ToDo check for the state of the game
             if (CheckForWin()) {
