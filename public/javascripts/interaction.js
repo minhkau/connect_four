@@ -50,6 +50,9 @@ const setupSocket = function () {
             isRed = data.isRed;
             canMove = isRed;
             yellowIsNext = false;
+            circle.classList.remove('yellow');
+            circle.classList.remove('red');
+
             isRed ? circle.classList.add('yellow') : circle.classList.add('red');
             numberOfYellowPieces = 0;
             startClock();
@@ -90,6 +93,7 @@ const setupSocket = function () {
             winningText.textContent = 'Other player has disconnected'
             removeListners();
             winningMessage.classList.add('show');
+            stopClock();
             ws.close();
         }
     }
@@ -217,8 +221,8 @@ function startClock () {
 };
 //stops the clock
 function stopClock () {
-    console.log('in stop', interval)
-    // clearInterval(interval);
+    // console.log('in stop', interval)
+    clearInterval(interval);
     seconds = 0;
     minutes = 0;
 };
