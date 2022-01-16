@@ -102,6 +102,9 @@ h3{
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     transition: transform 0.3 ease;
+    position:absolute;
+    bottom: 33vh;
+    color: white;
   }
 
   .newGame::after,.newGame::before{
