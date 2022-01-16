@@ -41,18 +41,24 @@ fourth.addEventListener('transitionend',upFirst);
 const numberOfPlayers = document.querySelector('#players');
 const numberOfGamesPlayed = document.querySelector('#gamesplayed');
 const numberOfOngoingGames = document.querySelector('#ongoinggames');
+
+
 // request statistics from the server
-let xhr = new XMLHttpRequest();
-xhr.open('GET', 'stats', true)
-xhr.onload = function(){
-    if(this.status == 200){
-        let stats = JSON.parse(this.response);
-        // console.log(stats['number of players']);
-        numberOfPlayers.textContent = stats['number of players'];
-        numberOfGamesPlayed.textContent = stats['number of games played'];
-        numberOfOngoingGames.textContent = stats['number of ongoing games'];
+setInterval(() => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'stats', true)
+    xhr.onload = function(){
+        if(this.status == 200){
+            let stats = JSON.parse(this.response);
+            // console.log(stats['number of players']);
+            numberOfPlayers.textContent = stats['number of players'];
+            numberOfGamesPlayed.textContent = stats['number of games played'];
+            numberOfOngoingGames.textContent = stats['number of ongoing games'];
+        }
     }
-}
-xhr.send();
+    xhr.send();
+},
+1000)
+
 
 

@@ -8,7 +8,9 @@ let isRed;
 let canMove;
 let yellowIsNext;
 let numberOfYellowPieces = 0;
-let numberOfRedPieces = 0;
+let interval;
+let seconds = 0;
+let minutes = 0;
 
 const setupSocket = function () {
     ws.onopen = () => {
@@ -48,6 +50,9 @@ const setupSocket = function () {
             isRed = data.isRed;
             canMove = isRed;
             yellowIsNext = false;
+            isRed ? circle.classList.add('yellow') : circle.classList.add('red');
+            numberOfYellowPieces = 0;
+            startClock();
         }
 
         if (message == 'other player move') {
@@ -59,8 +64,7 @@ const setupSocket = function () {
 
             cellToPlay.classList.add(!isRed ? 'red' : 'yellow');
             //Updates the number of pieces
-            !isRed ? BoxForRedPieces.innerHTML=++numberOfRedPieces : BoxForYellowPieces.innerHTML=++numberOfYellowPieces;
-            isRed ? BoxForRedPieces.innerHTML=numberOfRedPieces++ : BoxForYellowPieces.innerHTML=numberOfYellowPieces++;
+            !isRed ? BoxForYellowPieces.innerHTML=++numberOfYellowPieces : BoxForYellowPieces.innerHTML=++numberOfYellowPieces;
 
 
             //ToDo check for the state of the game
@@ -68,6 +72,7 @@ const setupSocket = function () {
                 winningText.textContent = yellowIsNext ? 'Yellow wins' : 'Red wins';
                 removeListners();
                 winningMessage.classList.add('show');
+                stopClock();
                 // changeGameState();
                 finishGame();
                 ws.close();
@@ -118,8 +123,10 @@ const waitingMessage = document.querySelector('.waiting-message');
 const newGameButton = document.querySelector('#newGameButton');
 const winningText = document.querySelector('[data-winning-message-text]');
 const waitingText = document.querySelector('[data-waiting-message-text]');
-const BoxForYellowPieces = document.querySelector('.number-yellow h1');
-const BoxForRedPieces = document.querySelector('.number-red h1');
+const BoxForYellowPieces = document.querySelector('.number h1');
+const circle = document.querySelector('.circle');
+const secondsOnTimer = document.querySelector('.seconds');
+const minutesOnTimer = document.querySelector('.minutes');
 
 
 
@@ -182,6 +189,37 @@ const row5 = [cells[35], cells[36], cells[37], cells[38], cells[39], cells[40], 
 const rows = [row0, row1, row2, row3, row4, row5, topRow];
 
 let gameIsOn = true;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Clock section 
+
+// functionality of the clock
+function ruuningClock () {
+    seconds++;
+    if(seconds<=9){
+        secondsOnTimer.innerHTML = "0" + seconds;
+    }
+    if(seconds>9){
+        secondsOnTimer.innerHTML = seconds;
+    }
+    if(seconds>59){
+        secondsOnTimer.innerHTML = "00";
+        seconds = 0;
+        minutes++;
+    }
+    minutesOnTimer.innerHTML = minutes;
+};
+// starts the clock
+function startClock () {
+    interval = setInterval(ruuningClock,1000);
+    console.log(interval);
+};
+//stops the clock
+function stopClock () {
+    clearInterval(interval);
+    seconds = 0;
+    minutes = 0;
+};
+
 
 
 //Functions
