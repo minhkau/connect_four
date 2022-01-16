@@ -210,12 +210,15 @@ function ruuningClock () {
 };
 // starts the clock
 function startClock () {
+    secondsOnTimer.innerHTML = "00";
+    minutesOnTimer.innerHTML = "0";
     interval = setInterval(ruuningClock,1000);
-    console.log(interval);
+    // console.log('instart', interval);
 };
 //stops the clock
 function stopClock () {
-    clearInterval(interval);
+    console.log('in stop', interval)
+    // clearInterval(interval);
     seconds = 0;
     minutes = 0;
 };
@@ -320,6 +323,7 @@ const handleCellClick = (e) => {
             winningText.textContent = yellowIsNext ? 'Yellow wins' : 'Red wins';
             removeListners();
             winningMessage.classList.add('show');
+            stopClock();
             // changeGameState();
             finishGame();
             ws.close();
