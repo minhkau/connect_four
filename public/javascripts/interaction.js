@@ -95,10 +95,6 @@ const setupSocket = function () {
             game.makeMove(data);
         }
 
-        // if(message == 'game end'){
-        //     // one player has won the game 
-        //     console.log('game ends, move to next game');
-        // }
 
         if (message == 'other player afk') {
             game.otherPlayerAfk();
