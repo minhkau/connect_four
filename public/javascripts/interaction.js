@@ -3,83 +3,90 @@
 // let ws = new WebSocket('ws://connect4minhkau.herokuapp.com/:' + portNumber);
 let HOST = location.origin.replace(/^http/, 'ws');
 let ws = new WebSocket(HOST);
-let playerName;
-let isRed;
+// let playerName;
+// let isRed;
 let canMove;
 let yellowIsNext;
 let interval;
-let game=new cos();
+let game;
+
+function Game(){
+    this.minutes = 0;
+    this.seconds = 0;
+    this.numberOfYellowPieces = 0;
+}
+
+Game.prototype.startGame = (data) => {
+    waitingMessage.classList.remove('show');
+    cleanBoard();
+    game.isRed = data.isRed;
+    canMove = game.isRed;
+    yellowIsNext = false;
+    circle.classList.remove('yellow');
+    circle.classList.remove('red');
+
+    game.isRed ? circle.classList.add('yellow') : circle.classList.add('red');
+    game.numberOfYellowPieces = 0;
+    startClock();
+}
+
+Game.prototype.makeMove = (data) => {
+    canMove = true;
+    const [rowIndex, colIndex] = data.location;
+    const cellToPlay = getFirstPossibleCell(colIndex);
+    const classListOfCellToPlay = getClassListArray(cellToPlay);
+
+    cellToPlay.classList.add(!game.isRed ? 'red' : 'yellow');
+    //Updates the number of pieces
+    !game.isRed ? BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces : BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces;
+
+
+    //ToDo check for the state of the game
+    if (CheckForWin()) {
+        winningText.textContent = yellowIsNext ? 'Yellow wins' : 'Red wins';
+        removeListners();
+        winningMessage.classList.add('show');
+        stopClock();
+        // changeGameState();
+        finishGame();
+        ws.close();
+    };
+    yellowIsNext = !yellowIsNext;
+    clearTop(colIndex);
+}
+
+Game.prototype.otherPlayerAfk = () => {
+    winningText.textContent = 'Other player has disconnected'
+    removeListners();
+    winningMessage.classList.add('show');
+    stopClock();
+    ws.close();
+}
 
 const setupSocket = function () {
     ws.onopen = () => {
+        game = new Game();
         console.log('connecting to server');
     };
 
-    /**
-     * List of messgaes:
-     * 
-     * Sent by server:
-     * join room
-     * game start
-     * other player move
-     * other player afk
-     * 
-     * 
-     * Sent by client:
-     * make move
-     * finish game
-     * 
-     */
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
         const message = data.message;
         if (message == 'join room') {
             // gameID = ws['id'];
-            playerName = data.playerName;
-            if (playerName == 'a') {
+            game.playerName = data.playerName;
+            if (game.playerName == 'a') {
                 waitingText.textContent = 'Waiting for another player';
                 waitingMessage.classList.add('show');
             }
         };
 
         if (message == 'game start') {
-            waitingMessage.classList.remove('show');
-            cleanBoard();
-            isRed = data.isRed;
-            canMove = isRed;
-            yellowIsNext = false;
-            circle.classList.remove('yellow');
-            circle.classList.remove('red');
-
-            isRed ? circle.classList.add('yellow') : circle.classList.add('red');
-            game.numberOfYellowPieces = 0;
-            startClock();
+            game.startGame(data);
         }
 
         if (message == 'other player move') {
-            // the data object contains the location of the new move
-            canMove = true;
-            const [rowIndex, colIndex] = data.location;
-            const cellToPlay = getFirstPossibleCell(colIndex);
-            const classListOfCellToPlay = getClassListArray(cellToPlay);
-
-            cellToPlay.classList.add(!isRed ? 'red' : 'yellow');
-            //Updates the number of pieces
-            !isRed ? BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces : BoxForYellowPieces.innerHTML=++game.numberOfYellowPieces;
-
-
-            //ToDo check for the state of the game
-            if (CheckForWin()) {
-                winningText.textContent = yellowIsNext ? 'Yellow wins' : 'Red wins';
-                removeListners();
-                winningMessage.classList.add('show');
-                stopClock();
-                // changeGameState();
-                finishGame();
-                ws.close();
-            };
-            yellowIsNext = !yellowIsNext;
-            clearTop(colIndex);
+            game.makeMove(data);
         }
 
         // if(message == 'game end'){
@@ -88,11 +95,7 @@ const setupSocket = function () {
         // }
 
         if (message == 'other player afk') {
-            winningText.textContent = 'Other player has disconnected'
-            removeListners();
-            winningMessage.classList.add('show');
-            stopClock();
-            ws.close();
+            game.otherPlayerAfk();
         }
     }
 
@@ -105,7 +108,7 @@ const makeMove = (location) => {
     ws.send(JSON.stringify({
         message: 'make move',
         // player is either a or b 
-        playerName: playerName,
+        playerName: game.playerName,
         location: location,
     }))
 }
@@ -231,11 +234,7 @@ function stopClock () {
 
 //returns array form of classes of a cell
 
-function cos(){
-    this.minutes = 0;
-    this.seconds = 0;
-    this.numberOfYellowPieces = 0;
-}
+
 const getClassListArray = (cell) => {
     const classList = cell.classList;
     return [...classList];
@@ -302,7 +301,7 @@ const handleMouseOver = (e) => {
     const [rowIndex, colIndex] = getCellLocation(cell);
 
     const topCell = topCells[colIndex];
-    topCell.classList.add(isRed ? 'red' : 'yellow');
+    topCell.classList.add(game.isRed ? 'red' : 'yellow');
 };
 
 const handleMouseOut = (e) => {
@@ -323,7 +322,7 @@ const handleCellClick = (e) => {
 
         if (cell === null) return;
 
-        cellToPlay.classList.add(isRed ? 'red' : 'yellow');
+        cellToPlay.classList.add(game.isRed ? 'red' : 'yellow');
         makeMove([rowIndex, colIndex]);
 
         //ToDo check for the state of the game
@@ -447,6 +446,7 @@ const resetGame = () => {
     // ws = new WebSocket('ws://localhost:3000');
     HOST = location.origin.replace(/^http/, 'ws');
     ws = new WebSocket(HOST);
+    BoxForYellowPieces.innerHTML = ''
     setupSocket();
     // cleanBoard();
 }
