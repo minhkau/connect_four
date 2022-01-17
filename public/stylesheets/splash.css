@@ -16,6 +16,7 @@
     background-size: cover;
     background-image: url(../images/splush.svg);
     position: relative;
+    overflow: hidden;
 }
 h3{
     color: #99CCFF;
@@ -73,6 +74,20 @@ h3{
     justify-content: space-evenly;
     align-items: center;
     bottom: 10vh;
+    transition: all 2s;
+}
+
+.information.active{
+    animation: cos-tam 3s ease-in-out forwards;
+}
+
+@keyframes cos-tam{
+    100%{
+        transform: rotate(360deg);
+    }
+    50%{
+        transform: rotate(-60deg);
+    }
 }
 
 .piece{
@@ -130,4 +145,8 @@ h3{
   }
   .newGame:hover::after{
     transform: translate(12px,12px);
+  }
+
+  .newGame:active{
+      box-shadow:20px 20px 20px 20px aqua;
   }
