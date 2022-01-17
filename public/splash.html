@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four</title>
+</head>
+<body>
+    <div class="container">
+        <div class="cell yellow left first"></div>
+        <div class="cell red second"></div>
+        <div class="cell yellow third"></div>
+        <div class="cell yellow right fourth"></div>
+        <div class="massage">
+            <h3>Welcome to Connect Four</h3>
+        </div>
+        <button class="newGame" onclick="location.href='/game'" >New Game</button>
+        <div class="information">
+            <div class="piece">
+                <div>Number of active players</div>
+                <div id="players"></div>
+            </div>
+            <div class="piece">
+                <div>Number of games played</div>
+                <div id="gamesplayed"></div>
+            </div>
+            <div class="piece">
+                <div>Number of ongoing games</div>
+                <div id="ongoinggames"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
