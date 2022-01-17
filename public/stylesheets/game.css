@@ -309,13 +309,30 @@ footer .container .Minh{
   }
 
   #newGameButton:hover{
+    animation: szybko 2s ease-in-out forwards;
     transform: translate(-12px,-12px);
   }
   #newGameButton:hover::after{
     transform: translate(6px,6px);
   }
-  #newGameButton:hover::after{
-    transform: translate(12px,12px);
+  #newGameButton:hover::before{
+    transform: translate(-6px,-6px);
+  }
+
+  #newGameButton:active{
+    box-shadow:20px 20px 20px 20px aqua;
+  }
+
+  @keyframes szybko {
+    100%{
+      transform: translateX(0);
+    }
+    75%{
+      transform: translateX(50%);
+    }
+    35%{
+      transform: translateX(-50%);
+    }
   }
 
 
