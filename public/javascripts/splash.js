@@ -2,6 +2,7 @@ const first = document.querySelector('.first');
 const second= document.querySelector('.second');
 const third = document.querySelector('.third');
 const fourth =  document.querySelector('.fourth');
+const info = document.querySelectorAll('.information')
 
 // console.log(first,second,third,fourth);
 
@@ -10,6 +11,7 @@ const upFirst = (e) =>{
     // console.log(e);
     first.classList.toggle('up');
     // console.log(first);
+    info.forEach(inf=>inf.classList.toggle('active'))
 };
 const upSecond = (e)=>{
     // console.log(e.target);
