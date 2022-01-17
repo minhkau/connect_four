@@ -48,7 +48,7 @@ Game.prototype.makeMove = (data) => {
         winningMessage.classList.add('show');
         stopClock();
         // changeGameState();
-        finishGame();
+        game.finishGame();
         ws.close();
     };
     yellowIsNext = !yellowIsNext;
@@ -61,6 +61,12 @@ Game.prototype.otherPlayerAfk = () => {
     winningMessage.classList.add('show');
     stopClock();
     ws.close();
+}
+
+Game.prototype.finishGame = () => {
+    ws.send(JSON.stringify({
+        message: 'finish game',
+    }))
 }
 
 const setupSocket = function () {
@@ -332,7 +338,7 @@ const handleCellClick = (e) => {
             winningMessage.classList.add('show');
             stopClock();
             // changeGameState();
-            finishGame();
+            game.finishGame();
             ws.close();
         };
         yellowIsNext = !yellowIsNext;
